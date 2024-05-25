@@ -1,2 +1,2 @@
 # shop
-## A shop application built with Springboot
+## A project demonstrating the use of Spring Boot Web API

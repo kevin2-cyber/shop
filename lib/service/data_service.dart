@@ -1,15 +1,17 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
-import '../model/product.dart';
-
 class DataService {
-  final String kBaseUrl = "http://127.0.0.1:3000/api/product/";
+
+
 
    Future<dynamic> get() async {
 
-    final response = await http.get(Uri.parse(kBaseUrl));
+    await dotenv.load(fileName: 'assets/.env');
+     String kBaseUrl = dotenv.get('ENDPOINT');
+    final response = await http.get(Uri.parse('$kBaseUrl/api/product/'));
 
     if (response.statusCode == 200) {
       return json.decode(response.body);
@@ -31,7 +33,9 @@ class DataService {
   }
 
   Future<dynamic> post(Map<String, dynamic> data) async {
-     final response = await http.post(Uri.parse(kBaseUrl),
+    await dotenv.load(fileName: 'assets/.env');
+    String kBaseUrl = dotenv.get('ENDPOINT');
+     final response = await http.post(Uri.parse('$kBaseUrl/api/product/'),
          headers: <String, String> {
      'Content-Type': 'application/json; charset=UTF-8',
      },

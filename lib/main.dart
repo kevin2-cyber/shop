@@ -72,7 +72,10 @@ class _HomeState extends State<Home> {
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
                 return ListTile(
+                  leading: Text(snapshot.data[index]['id'].toString()),
                   title: Text(snapshot.data[index]['name']),
+                  subtitle: Text(snapshot.data[index]['quantity'].toString()),
+                  trailing: Text(snapshot.data[index]['unitPrice'].toString()),
                 );
               },
             );
